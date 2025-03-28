@@ -2,6 +2,23 @@ import { redis } from "../lib/redis.js";
 import cloudinary from "../lib/cloudinary.js";
 import Product from "../models/product.model.js";
 
+export const searchProducts = async(req,res)=>{
+	try {
+        const { query } = req.query;
+
+        if (!query) {
+            return res.status(400).json({ message: "Search query is required" });
+        }
+
+        const products = await Product.find({
+			name: { $regex: query, $options: "i" } // Case-insensitive regex search
+		});
+
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json({ message: "Error searching products", error });
+    }
+}
 export const getAllProducts = async (req, res) => {
 	try {
 		const products = await Product.find({}); // find all products
