@@ -23,7 +23,7 @@ html {
 /* Force all text to be black by default */
 body, 
 body * {
-    color: goldenrod !important; /* Forces text color to be black everywhere */
+    color: #4f4f4f !important; /* Forces text color to be black everywhere */
     ;
 }
 

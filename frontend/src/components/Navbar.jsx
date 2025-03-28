@@ -26,7 +26,7 @@ const Navbar = () => {
 				<div className="flex flex-wrap justify-between items-center">
 					{/* Logo */}
 					<Link to="/" className="text-2xl font-bold text-blue-600 items-center space-x-2 flex">
-						<img src="../../logo.png" alt="ECommerce Logo" className="h-14 w-auto" />
+						<img src="../../logo2.png" alt="ECommerce Logo" className="h-14 w-auto" />
 					</Link>
 
 					{/* Search Bar */}
@@ -45,9 +45,13 @@ const Navbar = () => {
 
 					{/* Navigation Links */}
 					<nav className="flex flex-wrap items-center gap-4">
-						<Link to={"/"} className="text-gray-700 hover:text-blue-600 transition duration-300 ease-in-out">
-							Home
-						</Link>
+					<Link
+						to={"/"}
+						className="bg-slate-500 hover:bg-slate-700 text-white py-2 px-4 
+						rounded-md flex items-center transition duration-300 ease-in-out"
+					>
+						Home
+					</Link>
 						{user && (
 							<Link to={"/cart"} className="relative group text-gray-700 hover:text-blue-600 transition duration-300 ease-in-out">
 								<ShoppingCart className="inline-block mr-1 group-hover:text-blue-600" size={20} />
