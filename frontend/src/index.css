@@ -23,13 +23,13 @@ html {
 /* Force all text to be black by default */
 body, 
 body * {
-    color: #5f5f4f !important; /* Forces text color to be black everywhere */
+    color: goldenrod !important; /* Forces text color to be black everywhere */
     ;
 }
 
 /* Forcing links to be black unless overridden */
 a {
-    color: aquamarine !important;
+    color: black !important;
     text-decoration: none;
 }
 

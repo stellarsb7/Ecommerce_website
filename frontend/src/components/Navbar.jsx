@@ -45,13 +45,9 @@ const Navbar = () => {
 
 					{/* Navigation Links */}
 					<nav className="flex flex-wrap items-center gap-4">
-					<Link
-						to={"/"}
-						className="bg-slate-600 hover:bg-slate-800 text-white py-2 px-4 
-						rounded-md flex items-center transition duration-300 ease-in-out"
-					>
-						Home
-					</Link>
+						<Link to={"/"} className="text-gray-700 hover:text-blue-600 transition duration-300 ease-in-out">
+							Home
+						</Link>
 						{user && (
 							<Link to={"/cart"} className="relative group text-gray-700 hover:text-blue-600 transition duration-300 ease-in-out">
 								<ShoppingCart className="inline-block mr-1 group-hover:text-blue-600" size={20} />

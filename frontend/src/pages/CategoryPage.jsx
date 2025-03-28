@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useProductStore } from "../stores/useProductStore";
-import { useParams,Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProductCard from "../components/ProductCard";
 
@@ -35,9 +35,7 @@ const CategoryPage = () => {
 							No products found
 						</h2>
 					) : (
-						products.map((product) => <Link key={product._id} to={`/product/${product._id}`}>
-			<ProductCard product={product} />
-		</Link>)
+						products.map((product) => <ProductCard key={product._id} product={product} />)
 					)}
 				</motion.div>
 			</div>
@@ -46,4 +44,3 @@ const CategoryPage = () => {
 };
 
 export default CategoryPage;
-
