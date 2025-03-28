@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import your desired font */
+
+/* Apply global styles */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply the font globally */
+html {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Force all text to be black by default */
+body, 
+body * {
+    color: goldenrod !important; /* Forces text color to be black everywhere */
+    ;
+}
+
+/* Forcing links to be black unless overridden */
+a {
+    color: black !important;
+    text-decoration: none;
+}
+
+/* Styling inputs and textareas for consistency */
+input, textarea {
+    color: black !important;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Buttons text styling */
+button {
+    color: black !important;
+    font-family: 'Poppins', sans-serif;
+}
