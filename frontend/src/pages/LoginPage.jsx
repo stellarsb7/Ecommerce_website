@@ -81,7 +81,7 @@ const LoginPage = () => {
 
 						<button
 							type='submit'
-							className={`w-full flex justify-center py-2 px-4 border border-transparent 
+							className={`dark-button w-full flex justify-center py-2 px-4 border border-transparent 
 								rounded-md shadow-sm text-sm font-medium text-white bg-green-500 
 								hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 
 								focus:ring-green-500 transition duration-150 ease-in-out 
@@ -106,7 +106,7 @@ const LoginPage = () => {
 						Not a member?{" "}
 						<Link
 							to='/signup'
-							className='font-medium text-blue-600 hover:text-blue-500 flex items-center justify-center'
+							className='font-medium !text-blue-500 hover:!text-blue-700 flex items-center justify-center'
 						>
 							Sign up now
 							<ArrowRight className='inline h-4 w-4 ml-1' />

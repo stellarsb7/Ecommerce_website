@@ -1,4 +1,4 @@
-import { ShoppingCart, UserPlus, LogIn, LogOut, Lock, Search } from "lucide-react";
+import { ShoppingCart, UserPlus, LogIn, LogOut, Lock, Search, ShoppingBag } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUserStore } from "../stores/useUserStore";
@@ -33,7 +33,7 @@ const Navbar = () => {
 					<form onSubmit={handleSearch} className="flex items-center border border-gray-300 rounded-md px-3 py-1 bg-white">
 						<input
 							type="text"
-							placeholder="Search products..."
+							placeholder="Search UrbanTrend"
 							className="px-3 py-2 outline-none text-gray-700 bg-white"
 							value={searchQuery}
 							onChange={(e) => setSearchQuery(e.target.value)}
@@ -47,19 +47,21 @@ const Navbar = () => {
 					<nav className="flex flex-wrap items-center gap-4">
 					<Link
 						to={"/"}
-						className="bg-slate-500 hover:bg-slate-700 text-white py-2 px-4 
+						className="dark-button bg-slate-500 hover:bg-slate-700 py-2 px-4 
 						rounded-md flex items-center transition duration-300 ease-in-out"
 					>
 						Home
 					</Link>
+
+						{/* Cart */}
 						{user && (
-							<Link to={"/cart"} className="relative group text-gray-700 hover:text-blue-600 transition duration-300 ease-in-out">
+							<Link to={"/cart"} className="relative group  py-2 px-4 rounded-md shadow-mg transition duration-300 ease-in-out flex items-center" >
 								<ShoppingCart className="inline-block mr-1 group-hover:text-blue-600" size={20} />
-								<span className="hidden sm:inline">Cart</span>
+								<span className="hidden sm:inline ">Cart</span>
 								{cart.length > 0 && (
 									<span
-										className="absolute -top-2 -left-2 bg-green-600 text-white rounded-full px-2 py-0.5 
-									text-xs group-hover:bg-green-500 transition duration-300 ease-in-out"
+										className="absolute -top-2 -left-0 bg-green-500 text-white rounded-full px-2 py-0.5 
+									text-xs group-hover:bg-green-600 transition duration-300 ease-in-out"
 									>
 										{cart.length}
 									</span>
@@ -70,30 +72,41 @@ const Navbar = () => {
 						{/* Admin Dashboard */}
 						{isAdmin && (
 							<Link
-								className="bg-green-600 hover:bg-green-500 text-white px-3 py-1 rounded-md font-medium
+								className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium
 								 transition duration-300 ease-in-out flex items-center"
 								to={"/secret-dashboard"}
 							>
 								<Lock className="inline-block mr-1" size={18} />
-								<span className="hidden sm:inline">Dashboard</span>
+								<span className="dark-button hidden sm:inline">Dashboard</span>
 							</Link>
 						)}
 
 						{/* User Authentication */}
+						{user ? (<Link
+								className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-md font-medium
+								 transition duration-300 ease-in-out flex items-center"
+								to={"/orders"}
+							>
+								<ShoppingBag className="inline-block mr-1" size={18} />
+								<span className="dark-button hidden sm:inline">My Orders</span>
+							</Link>):(<></>)}
 						{user ? (
+							<div>
+							
 							<button
-								className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 
+								className="bg-red-500 hover:bg-red-700 !text-white py-2 px-4 
 								rounded-md flex items-center transition duration-300 ease-in-out"
 								onClick={logout}
 							>
-								<LogOut size={18} />
-								<span className="hidden sm:inline ml-2">Log Out</span>
+								<LogOut size={18} className="dark-button"/>
+								<span className="dark-button hidden sm:inline ml-2">Log Out</span>
 							</button>
+							</div>
 						) : (
 							<>
 								<Link
 									to={"/signup"}
-									className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 
+									className="dark-button bg-green-500 hover:bg-green-700 py-2 px-4 
 									rounded-md flex items-center transition duration-300 ease-in-out"
 								>
 									<UserPlus className="mr-2" size={18} />
@@ -101,10 +114,10 @@ const Navbar = () => {
 								</Link>
 								<Link
 									to={"/login"}
-									className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 
+									className="dark-button bg-orange-500 hover:bg-orange-700  py-2 px-4 
 									rounded-md flex items-center transition duration-300 ease-in-out"
 								>
-									<LogIn className="mr-2" size={18} />
+									<LogIn className="mr-2 dark-button" size={18} />
 									Login
 								</Link>
 							</>

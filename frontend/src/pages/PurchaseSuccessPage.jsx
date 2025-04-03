@@ -5,13 +5,14 @@ import { useCartStore } from "../stores/useCartStore";
 import axios from "../lib/axios";
 import Confetti from "react-confetti";
 
+var isCalled=false;
+
 const PurchaseSuccessPage = () => {
 	const [isProcessing, setIsProcessing] = useState(true);
 	const { clearCart } = useCartStore();
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		let isCalled=false;
 		const handleCheckoutSuccess = async (sessionId) => {
 			try {
 				if(isCalled) return;
@@ -36,9 +37,9 @@ const PurchaseSuccessPage = () => {
 		}
 	}, [clearCart]);
 
-	if (isProcessing) return <div className="text-center text-gray-600">Processing...</div>;
+	if (isProcessing) return <div className="text-center text-gray-600 bg-white">Processing...</div>;
 
-	if (error) return <div className="text-center text-red-500">Error: {error}</div>;
+	if (error) return <div className="text-center text-red-500 bg-white">Error: {error}</div>;
 
 	return (
 		<div className='h-screen flex items-center justify-center px-4 bg-white' style={{ backgroundColor: 'white' }}>

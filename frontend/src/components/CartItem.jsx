@@ -39,10 +39,10 @@ const CartItem = ({ item }) => {
 				</div>
 
 				<div className='w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md'>
-					<p className='text-base font-medium text-blue-700 hover:text-green-500 hover:underline'>
+					<p className='text-base font-medium !text-blue-700 hover:!text-green-500 hover:underline'>
 						{item.name}
 					</p>
-					<p className='text-sm text-blue-500'>{item.description}</p>
+					{/* <p className='text-sm text-blue-500'>{item.description}</p> */}
 
 					<div className='flex items-center gap-4'>
 						<button

@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 
 export const useUserStore = create((set, get) => ({
 	user: null,
+	token: localStorage.getItem("token") || null, // Store token
 	loading: false,
 	checkingAuth: true,
 
@@ -17,6 +18,7 @@ export const useUserStore = create((set, get) => ({
 
 		try {
 			const res = await axios.post("/auth/signup", { name, email, password });
+			localStorage.setItem("token", res.data.token); // Save token in localStorage
 			set({ user: res.data, loading: false });
 		} catch (error) {
 			set({ loading: false });
@@ -28,7 +30,7 @@ export const useUserStore = create((set, get) => ({
 
 		try {
 			const res = await axios.post("/auth/login", { email, password });
-
+			localStorage.setItem("token", res.data.token); // Save token
 			set({ user: res.data, loading: false });
 		} catch (error) {
 			set({ loading: false });
@@ -39,6 +41,7 @@ export const useUserStore = create((set, get) => ({
 	logout: async () => {
 		try {
 			await axios.post("/auth/logout");
+			localStorage.removeItem("token"); // Remove token
 			set({ user: null });
 		} catch (error) {
 			toast.error(error.response?.data?.message || "An error occurred during logout");

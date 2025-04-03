@@ -78,6 +78,13 @@ export const checkoutSuccess = async (req, res) => {
 		const { sessionId } = req.body;
 		const session = await stripe.checkout.sessions.retrieve(sessionId);
 
+		// Check if an order with this stripeSessionId already exists
+		const existingOrder = await Order.findOne({ stripeSessionId: sessionId });
+		if (existingOrder) {
+			console.warn("⚠️ Order already exists for session:", sessionId);
+			// return res.status(400).json({ message: "Order already processed" });
+		}
+
 		if (session.payment_status === "paid") {
 			if (session.metadata.couponCode) {
 				await Coupon.findOneAndUpdate(
@@ -85,13 +92,11 @@ export const checkoutSuccess = async (req, res) => {
 						code: session.metadata.couponCode,
 						userId: session.metadata.userId,
 					},
-					{
-						isActive: false,
-					}
+					{ isActive: false }
 				);
 			}
 
-			// create a new Order
+			// Create a new Order only if it doesn't exist
 			const products = JSON.parse(session.metadata.products);
 			const newOrder = new Order({
 				user: session.metadata.userId,
@@ -100,23 +105,27 @@ export const checkoutSuccess = async (req, res) => {
 					quantity: product.quantity,
 					price: product.price,
 				})),
-				totalAmount: session.amount_total / 100, // convert from cents to dollars,
+				totalAmount: session.amount_total / 100, // convert from cents to dollars
 				stripeSessionId: sessionId,
 			});
 
-			await newOrder.save();
+			if(!existingOrder)
+				await newOrder.save();
 
 			res.status(200).json({
 				success: true,
 				message: "Payment successful, order created, and coupon deactivated if used.",
 				orderId: newOrder._id,
 			});
+		} else {
+			res.status(400).json({ message: "Payment not completed" });
 		}
 	} catch (error) {
 		console.error("Error processing successful checkout:", error);
 		res.status(500).json({ message: "Error processing successful checkout", error: error.message });
 	}
 };
+
 
 async function createStripeCoupon(discountPercentage) {
 	const coupon = await stripe.coupons.create({
